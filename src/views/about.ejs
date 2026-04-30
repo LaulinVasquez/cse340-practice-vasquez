@@ -1,22 +1,8 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About me</title>
-    <link rel="stylesheet" href="/css/about.css" />
-  </head>
-  <body>
-    <h1>About me</h1>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/products">Products</a></li>
-      </ul>
-    </nav>
+<%- include('partials/header') %>
+  <main>
+    <h1><%= title %></h1>
     <div class="bio">
-      <h3>Laurin Vasquez</h3>
+      <h3><%= name %></h3>
       <div class="bio-container">
         <img src="/images/family.jpeg" alt="Family" width="200" />
         <p>
@@ -37,5 +23,5 @@
         <li>Spending time with friends and family</li>
       </ul>
     </div>
-  </body>
-</html>
+  </main>
+<%- include('partials/footer') %>
