@@ -3,7 +3,42 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
-
+// Cpurse data
+const courses = {
+    'CS121': {
+        id: 'CS121',
+        title: 'Introduction to Programming',
+        description: 'Learn programming fundamentals using JavaScript and basic web development concepts.',
+        credits: 3,
+        sections: [
+            { time: '9:00 AM', room: 'STC 392', professor: 'Brother Jack' },
+            { time: '2:00 PM', room: 'STC 394', professor: 'Sister Enkey' },
+            { time: '11:00 AM', room: 'STC 390', professor: 'Brother Keers' }
+        ]
+    },
+    'MATH110': {
+        id: 'MATH110',
+        title: 'College Algebra',
+        description: 'Fundamental algebraic concepts including functions, graphing, and problem solving.',
+        credits: 4,
+        sections: [
+            { time: '8:00 AM', room: 'MC 301', professor: 'Sister Anderson' },
+            { time: '1:00 PM', room: 'MC 305', professor: 'Brother Miller' },
+            { time: '3:00 PM', room: 'MC 307', professor: 'Brother Thompson' }
+        ]
+    },
+    'ENG101': {
+        id: 'ENG101',
+        title: 'Academic Writing',
+        description: 'Develop writing skills for academic and professional communication.',
+        credits: 3,
+        sections: [
+            { time: '10:00 AM', room: 'GEB 201', professor: 'Sister Anderson' },
+            { time: '12:00 PM', room: 'GEB 205', professor: 'Brother Davis' },
+            { time: '4:00 PM', room: 'GEB 203', professor: 'Sister Enkey' }
+        ]
+    }
+};
 
 // app = express() creates an instance for the application 
 const app = express();
@@ -39,11 +74,65 @@ app.get('/products', (req, res) => {
     res.render('products', { title });
 });
 
-app.get('/test-error', (req, res, next) => {
-    const err = new Error('This is a test error');
-    err.status = 500;
-    next(err);
+app.get("/catalog", (req, res) => {
+    res.render('catalog',{
+        title: "Course Catalog",
+        courses: courses
+    })
+})
+
+app.get("/catalog/:courseId", (req, res, next) => {
+    // Extract the ID from the URL
+    const courseId = req.params.courseId;
+
+    // Lool up the course in our data
+    const course = courses[courseId]
+
+    if (!course) {
+        // error handler, if there is not ID in our database send it right through the middleware error handler
+        const err = new Error(`Course ${courseId} not Found`);
+        err.status = 404;
+        return next(err);
+    }
+    // Get sort parameter (default to 'time')
+    const sortBy = req.query.sort || "time";
+
+    // Create a copy of sections to sort
+    let sortedSections = [...course.sections];
+
+    //  Sort based on the parameter
+    switch(sortBy) {
+        case "profesor":
+            sortedSections.sort((a, b) => a.professor.localeCompare(b.professor));
+            break;
+        case "room":
+            sortedSections.sort((a, b) => a.room.localeCompare(b.room));
+            break;
+        case "time":
+            default:
+                // keep original time order as default
+                break
+    }
+    console.log(`Viewing course: ${courseId}, sorted by: ${sortBy}`);
+
+    res.render('course-details', {
+        title: `${courseId} - ${course.title}`,
+        course: {...course, sections: sortedSections},
+        currentSort: sortBy
+    });
 });
+
+// app.get('/products/:id', (req, res) => {
+//     const userId = req.params.id;
+//     // Validate that the ID is numeric
+//     if (!/^\d+$/.test(userId)) {
+//         return res.status(400).send('Invalid user ID. Must be a number.');
+//     }
+//     // Convert string to number for use in application logic
+//     const numericUserId = parseInt(userId, 10);
+//     res.send(`You requested information for user ID: ${numericUserId}`);
+// });
+
 
 // Global error handling middleware for 404 and other errors
 app.use((req, res, next) => {

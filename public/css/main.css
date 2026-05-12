@@ -1,4 +1,6 @@
 @import 'about.css';
+@import 'catalog.css';
+
 html, body {
     background-color: lightblue;
     font-family: Arial, sans-serif, Helvetica;
