@@ -23,7 +23,7 @@ const courseDetailPage = (req, res, next) => {
   }
 
   //  Handle sorting if requested
-  const sortBy = req.query.sort || "time";
+  const sortBy = req.query.sort || 'time';
   const sortedSections = getSortedSections(course.sections, sortBy);
 
   res.render("course-details", {

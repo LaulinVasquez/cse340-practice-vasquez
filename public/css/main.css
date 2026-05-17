@@ -1,5 +1,6 @@
 @import 'about.css';
 @import 'catalog.css';
+@import 'faculty.css';
 
 html, body {
     background-color: lightblue;

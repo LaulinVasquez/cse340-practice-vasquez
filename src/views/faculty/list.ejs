@@ -1,0 +1,35 @@
+<%- include("../partials/header") %>
+
+<main>
+    <div class="faculty-header">
+        <h1>Faculty Directory</h1>
+        <p class="faculty-description">
+            Browse faculty members by department, title, or name.
+        </p>
+    </div>
+
+    <div class="faculty-sections">
+        <div class="faculty-section-header">
+            <h2>Faculty Members</h2>
+
+            <div class="sort-options">
+                <span>Sort by:</span>
+                <a href="/faculty" class="<%= currentSort === 'name' ? 'active' : '' %>"> Name</a>
+                <a href="/faculty?sort=department" class="<%= currentSort === 'department' ? 'active' : '' %>">Department</a>
+                <a href="/faculty?sort=title" class="<%= currentSort === 'title' ? 'active' : '' %>">Title</a>
+            </div>
+        </div>
+
+        <div class="faculty-list">
+            <% Object.entries(faculty).forEach(([id, teacher]) => { %>
+                <div class="faculty-card">
+                    <h3><a href="/faculty/<%= id %>"><%= teacher.name %></a></h3>
+                    <p class="faculty-department">Department: <%= teacher.department %></p>
+                    <p class="faculty-title">Title: <%= teacher.title %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</main>
+
+<%- include("../partials/footer") %>

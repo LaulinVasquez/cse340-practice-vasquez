@@ -1,0 +1,156 @@
+/* =========================
+   Faculty Shared Styles
+========================= */
+
+.faculty-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem 1rem;
+}
+
+.faculty-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.faculty-description {
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* =========================
+   Sorting Section
+========================= */
+
+.faculty-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.sort-options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sort-options a {
+    text-decoration: none;
+    color: #444;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+.sort-options a:hover {
+    background-color: #f0f0f0;
+}
+
+.sort-options .active {
+    background-color: #222;
+    color: white;
+}
+
+/* =========================
+   Faculty List
+========================= */
+
+.faculty-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.faculty-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.faculty-card:hover {
+    transform: translateY(-4px);
+}
+
+.faculty-card h3 {
+    margin-bottom: 1rem;
+}
+
+.faculty-card h3 a {
+    text-decoration: none;
+    color: #222;
+}
+
+.faculty-card h3 a:hover {
+    color: #0066cc;
+}
+
+.faculty-department,
+.faculty-title {
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+/* =========================
+   Faculty Detail Page
+========================= */
+
+.faculty-detail {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.faculty-detail p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.faculty-detail strong {
+    color: #222;
+}
+
+/* =========================
+   Navigation
+========================= */
+
+.back-link {
+    margin-top: 2rem;
+}
+
+.back-link a {
+    text-decoration: none;
+    color: #0066cc;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 600px) {
+    .faculty-header h1 {
+        font-size: 2rem;
+    }
+
+    .faculty-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sort-options {
+        flex-wrap: wrap;
+    }
+}
