@@ -23,7 +23,7 @@
         <div class="faculty-list">
             <% Object.entries(faculty).forEach(([id, teacher]) => { %>
                 <div class="faculty-card">
-                    <h3><a href="/faculty/<%= id %>"><%= teacher.name %></a></h3>
+                    <h3><a href="/faculty/<%= teacher.id %>"><%= teacher.name %> <%=  %></a></h3>
                     <p class="faculty-department">Department: <%= teacher.department %></p>
                     <p class="faculty-title">Title: <%= teacher.title %></p>
                 </div>

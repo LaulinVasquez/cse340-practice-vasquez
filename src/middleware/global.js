@@ -25,7 +25,7 @@ const addLocalVariables = (req, res, next) => {
     res.locals.queryParams = {...req.query};
     
     // set greeting based on time of the day
-    res.locals.greetings = `<p>${getCurrentGreeting()}</p>`;
+    res.locals.greetings = getCurrentGreeting();
 
     //  Randomly assign a theme class to the body
     const themes = ['blue-theme', 'green-theme', 'red-theme'];

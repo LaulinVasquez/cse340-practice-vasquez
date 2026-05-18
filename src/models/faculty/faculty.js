@@ -17,7 +17,7 @@ const faculty = {
         title: 'Assistant Professor'
     },
     'brother-keers': {
-        name: 'Brother-Keers',
+        name: 'Brother Keers',
         office: 'STC 390',
         phone: '208-496-3456',
         email: 'keersb@byui.edu',
