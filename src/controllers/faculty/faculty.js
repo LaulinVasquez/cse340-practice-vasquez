@@ -2,10 +2,10 @@ import { getAllfaculty,getFacultyById,getSortedFaculty } from "../../models/facu
 
 // Create a facultyListPage function that renders the faculty list page
 const facultyListPage = (req,res) =>{
+    const facultyList = getAllfaculty();
     // handle sorting if requested
     const sortBy = req.query.sort || 'name';
     const faculty = getSortedFaculty(sortBy);
-    console.log(facultyList)
 
     res.render("faculty/list", {
         title: " Faculty Page",

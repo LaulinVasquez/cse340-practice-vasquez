@@ -3,7 +3,7 @@
 @import 'faculty.css';
 
 html, body {
-    background-color: lightblue;
+    background-color: rgb(39, 165, 208);
     font-family: Arial, sans-serif, Helvetica;
     margin: 0;
     padding: 20px;
@@ -21,10 +21,10 @@ body{
         }
         a{
             text-decoration: none;
-            color: #333;
+            color: #000000;
             font-weight: bold;
             &:hover {
-                color: #0066cc;
+                color: #ffffff;
             }
         }
     }
