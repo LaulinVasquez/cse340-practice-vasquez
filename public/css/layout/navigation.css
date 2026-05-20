@@ -1,0 +1,16 @@
+:root {
+  nav ul {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  nav a {
+    color: var(--color-text);
+    font-weight: bold;
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover {
+    color: white;
+  }
+}

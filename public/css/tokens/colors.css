@@ -1,0 +1,12 @@
+:root {
+    --color-primary: #2c5aa0;
+
+    --color-background: rgb(39, 165, 208);
+
+    --color-surface: #ffffff;
+
+    --color-text: #222;
+    --color-text-light: #666;
+
+    --color-border: #ddd;
+}

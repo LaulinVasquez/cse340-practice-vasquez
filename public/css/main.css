@@ -1,31 +1,33 @@
-@import 'about.css';
-@import 'catalog.css';
-@import 'faculty.css';
+@layer tokens, base, layout, features,components, utilities;
 
-html, body {
-    background-color: rgb(39, 165, 208);
-    font-family: Arial, sans-serif, Helvetica;
-    margin: 0;
-    padding: 20px;
-}
+@import url('./tokens/colors.css') layer(tokens);
+@import url('./tokens/variables.css') layer(tokens);
 
-body{
-    nav{
-        ul{
-            list-style-type:none;
-            padding:0;
-        }
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
-        a{
-            text-decoration: none;
-            color: #000000;
-            font-weight: bold;
-            &:hover {
-                color: #ffffff;
-            }
-        }
-    }
-}
+@import url('./base/elements.css') layer(base);
+@import url('./base/reset.css') layer(base);
+
+@import url('./layout/container.css') layer(layout);
+@import url('./layout/grid.css') layer(layout);
+@import url('./layout/navigation.css') layer(layout);
+
+@import url('./components/bio.css') layer(components);
+@import url('./components/card.css') layer(components);
+@import url('./components/nav.css') layer(components);
+
+@import url('./utilities/flex.css') layer(utilities);
+@import url('./utilities/text.css') layer(utilities);
+
+@import url('./features/faculty.css') layer(utilities);
+@import url('./features/catalog.css') layer(utilities);
+@import url('./features/about.css') layer(utilities);
+
+
+
+
+
+/* CSS file structure:
+base       → foundational/global styles
+components → reusable UI pieces
+layout     → page structure systems
+tokens     → design system values
+utilities  → helper classes */

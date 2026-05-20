@@ -1,7 +1,4 @@
-/* =========================
-   Faculty Shared Styles
-========================= */
-
+:root{
 .faculty-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -20,9 +17,6 @@
     line-height: 1.6;
 }
 
-/* =========================
-   Sorting Section
-========================= */
 
 .faculty-section-header {
     display: flex;
@@ -136,21 +130,4 @@
     text-decoration: underline;
 }
 
-/* =========================
-   Responsive
-========================= */
-
-@media (max-width: 600px) {
-    .faculty-header h1 {
-        font-size: 2rem;
-    }
-
-    .faculty-section-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .sort-options {
-        flex-wrap: wrap;
-    }
 }
