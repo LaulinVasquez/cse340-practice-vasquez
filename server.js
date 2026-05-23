@@ -2,6 +2,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import {setupDatabase, testConnection} from './src/models/setup.js'
 // import { isAuthenticated, isAdmin } from "./src/middleware/demo/auth.js";
 
 // Import MVC components
@@ -81,7 +82,9 @@ if (NODE_ENV.includes('dev')) {
 }
 
 // Start the server and listen on the defined port
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  await setupDatabase();
+  await testConnection()
   console.log(`Server is running on http://127.0.0.1:${PORT}`);
 });
 

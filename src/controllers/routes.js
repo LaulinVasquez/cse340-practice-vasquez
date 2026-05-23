@@ -16,14 +16,14 @@ router.get('/about', aboutPage);
 
 // Catalog and course detail
 router.get('/catalog', catalogPage);
-router.get('/catalog/:courseId', courseDetailPage);
+router.get('/catalog/:slugId', courseDetailPage);
 
 // Demo page
 router.get('/demo', addDemoHeaders, demoPage);
 
 // Faculty page
 router.get("/faculty", facultyListPage);
-router.get("/faculty/:facultyId", facultyDetailPage);
+router.get("/faculty/:facultySlug", facultyDetailPage);
 
 
 // Router to trigger error
