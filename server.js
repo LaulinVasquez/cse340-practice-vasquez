@@ -87,24 +87,3 @@ app.listen(PORT, async () => {
   await testConnection()
   console.log(`Server is running on http://127.0.0.1:${PORT}`);
 });
-
-//  Practice for refactoring
-
-// app.get("/login", (req, res) => {
-//   res.render("login", {
-//     title: "login",
-//   });
-// });
-
-// app.get("/dashboard", isAuthenticated, (req, res) => {
-//   res.render("dashboard", {
-//     title: "dashboard",
-//   });
-// });
-
-// app.get("/admin", isAuthenticated, isAdmin, (req, res) => {
-//   res.render("admin", {
-//     title: "Admin Panel",
-//     admin: "admin"
-//   });
-// });

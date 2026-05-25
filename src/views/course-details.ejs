@@ -9,20 +9,22 @@
     <div class="sections">
         <div class="sections-header">
             <h2>Available Sections</h2>
-            <div class="sort-options">
-                <span>Sort by: </span>
-                <a href="/catalog/<%= course.id %>" class="<%= currentSort === 'time' ? 'active' : '' %>">Time</a>
-                <a href="/catalog/<%= course.id %>?sort=professor" class="<%= currentSort === 'professor' ? 'active' : '' %>">Professor</a>
-                <a href="/catalog/<%= course.id %>?sort=room" class="<%= currentSort === "room" ? "active" : '' %>">Room</a>
-            </div>
+<div class="sort-options">
+    <span>Sort by: </span>
+    <a href="/catalog/<%= course.slug %>?sort=time"class="<%= currentSort === 'time' ? 'active' : '' %>">Time</a>
+    <a href="/catalog/<%= course.slug %>?sort=professor" class="<%= currentSort === 'professor' ? 'active' : '' %>">Professor</a>
+    <a href="/catalog/<%= course.slug %>?sort=room" class="<%= currentSort === 'room' ? 'active' : '' %>">Room</a>
+</div>
         </div>
 
         <div class="section-list">
-            <% course.sections.forEach(section => { %>
+            <% sections.forEach(section => { %>
                 <div class="section-card">
                     <div class="section-time"><%= section.time %></div>
+                    <div class="section-professor"><strong>course name:</strong> <%= section.courseName %></div>
+                    <div class="section-professor"><strong>Instructor:</strong> <%= section.professor %></div>
                     <div class="section-room">Room: <%= section.room %></div>
-                    <div class="section-professor">Instructor: <%= section.professor %></div>
+                    <div class="section-room">department: <%= section.department %></div>
                 </div>
             <% }); %>
         </div>
