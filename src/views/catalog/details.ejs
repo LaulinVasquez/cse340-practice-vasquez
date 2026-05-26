@@ -21,10 +21,10 @@
             <% sections.forEach(section => { %>
                 <div class="section-card">
                     <div class="section-time"><%= section.time %></div>
-                    <div class="section-professor"><strong>course name:</strong> <%= section.courseName %></div>
-                    <div class="section-professor"><strong>Instructor:</strong> <%= section.professor %></div>
-                    <div class="section-room">Room: <%= section.room %></div>
-                    <div class="section-room">department: <%= section.department %></div>
+                    <div class="section course"><strong>course name:</strong> <%= section.courseName %></div>
+                    <div class="section professor"><strong>Instructor:</strong> <%= section.professor %></div>
+                    <div class="section room">Room: <%= section.room %></div>
+                    <div class="section department">department: <%= section.department %></div>
                 </div>
             <% }); %>
         </div>

@@ -6,7 +6,7 @@ const catalogPage = async (req, res) => {
     // Model functions are async, so we must await them
     const courses = await getAllCourses();
     
-    res.render('catalog', {
+    res.render('/catalog/list', {
         title: 'Course Catalog',
         courses: courses
     });
@@ -20,8 +20,6 @@ const courseDetailPage = async (req, res, next) => {
     // Model functions are async, so we must await them
     const sections = await getSectionsByCourseSlug(courseSlug, sortBy);
     const course = await getCourseBySlug(courseSlug);
-    console.log(sections)
-    // console.log(course)
     
     // Our model returns empty object {} when not found, not null
     // Check if the object is empty using Object.keys()
