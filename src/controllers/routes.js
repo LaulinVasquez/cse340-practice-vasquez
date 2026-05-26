@@ -31,7 +31,7 @@ router.get("/", homePage);
 router.get("/about", aboutPage);
 
 // Catalog and course detail
-router.get("/list", catalogPage);
+router.get("/catalog/list", catalogPage);
 router.get("/catalog/:slugId", courseDetailPage);
 
 // Demo page
