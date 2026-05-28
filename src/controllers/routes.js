@@ -1,13 +1,14 @@
 import { Router } from "express";
+import contactRoutes from './forms/contact.js';
 
 //  Create a new router instance
 const router = Router();
 
-// TODO: Add import statements for controllers and middleware
 import { addDemoHeaders } from "../middleware/demo/headers.js";
 import { catalogPage, courseDetailPage } from "./catalog/catalog.js";
 import { homePage, aboutPage, demoPage, testErrorPage } from "./index.js";
 import { facultyListPage, facultyDetailPage } from "./faculty/faculty.js";
+
 // TODO: Add route definitions
 router.use("/", (req, res, next) => {
   res.addStyle('<link rel="stylesheet" href="/css/main.css">');
@@ -44,6 +45,9 @@ router.get("/demo", addDemoHeaders, demoPage);
 // Faculty page
 router.get("/faculty", facultyListPage);
 router.get("/faculty/:facultySlug", facultyDetailPage);
+
+// Contact page
+router.use('/contact', contactRoutes)
 
 // Router to trigger error
 router.get("/test-error", testErrorPage);
