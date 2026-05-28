@@ -2,8 +2,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import {setupDatabase, testConnection} from './src/models/setup.js'
-// import { isAuthenticated, isAdmin } from "./src/middleware/demo/auth.js";
+import { setupDatabase, testConnection } from "./src/models/setup.js";
 
 // Import MVC components
 import routes from "./src/controllers/routes.js";
@@ -23,8 +22,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs"); // set the view engine to ejs
 app.set("views", path.join(__dirname, "src/views")); // Tell Express where to find your templates
 
+
 // global middleware
 app.use(addLocalVariables);
+
+// setting up parse url-encoded ( Allow Express to receive and process POST data)
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 
 // Routes
 app.use("/", routes);
@@ -65,25 +69,25 @@ app.use((err, req, res, next) => {
   }
 });
 
-if (NODE_ENV.includes('dev')) {
-    const ws = await import('ws');
-    try {
-        const wsPort = parseInt(PORT) + 1;
-        const wsServer = new ws.WebSocketServer({ port: wsPort });
-        wsServer.on('listening', () => {
-            console.log(`WebSocket server is running on port ${wsPort}`);
-        });
-        wsServer.on('error', (error) => {
-            console.error('WebSocket server error:', error);
-        });
-    } catch (error) {
-        console.error('Failed to start WebSocket server:', error);
-    }
+if (NODE_ENV.includes("dev")) {
+  const ws = await import("ws");
+  try {
+    const wsPort = parseInt(PORT) + 1;
+    const wsServer = new ws.WebSocketServer({ port: wsPort });
+    wsServer.on("listening", () => {
+      console.log(`WebSocket server is running on port ${wsPort}`);
+    });
+    wsServer.on("error", (error) => {
+      console.error("WebSocket server error:", error);
+    });
+  } catch (error) {
+    console.error("Failed to start WebSocket server:", error);
+  }
 }
 
 // Start the server and listen on the defined port
 app.listen(PORT, async () => {
   await setupDatabase();
-  await testConnection()
+  await testConnection();
   console.log(`Server is running on http://127.0.0.1:${PORT}`);
 });
