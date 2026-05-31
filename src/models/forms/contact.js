@@ -7,13 +7,13 @@ import db from '../db.js';
  * @returns {Promise<Object>} The newly created contact form record
 */
 
-const createContactForm = async (subject, message) => {
+const createContactForm = async (fname, subject, message) => {
     const query = `
-        INSERT INTO contact_form (subject, message)
-        VALUES ($1, $2)
+        INSERT INTO contact_form (fname, subject, message)
+        VALUES ($1,$2, $3)
         RETURNING *
     `;
-    const result = await db.query(query, [subject, message]);
+    const result = await db.query(query, [fname, subject, message]);
     return result.rows[0];
 }
 /**
@@ -24,7 +24,7 @@ const createContactForm = async (subject, message) => {
 
 const getAllContactForms = async () => {
     const query = `
-        SELECT  id, subject, message, submitted
+        SELECT  id, fname, subject, message, submitted
         FROM contact_form
         ORDER BY submitted DESC
     `

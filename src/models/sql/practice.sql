@@ -3,6 +3,7 @@
 -- Add new tables and modifications here as you work through the course
 CREATE TABLE IF NOT EXISTS contact_form (
     id SERIAL PRIMARY KEY,
+    fname VARCHAR(255) NOT NULL,
     subject VARCHAR(255) NOT NULL,
     message TEXT NOT NULL,
     submitted TIMESTAMP DEFAULT CURRENT_TIMESTAMP

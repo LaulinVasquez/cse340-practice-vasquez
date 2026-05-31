@@ -28,11 +28,11 @@ const handleContactSubmission = async (req, res) => {
             title: "Contact Us"});
     }
     // Extract or get validate data
-    const { subject, message} = req.body;
+    const { fname,subject, message} = req.body;
 
     try{
         //  Save to database
-        await createContactForm(subject, message)
+        await createContactForm(fname, subject, message)
         console.log('Contact form submitted successfully');
         // Redirect to responses page on success
         res.redirect('/contact/responses');
@@ -63,6 +63,12 @@ router.get('/', showContactForm);
 //  POST / contact -  Handle contact form submission with validation
 router.post('/', 
     [
+        body('fname')
+            .trim()
+            .isLength({ min: 2, max: 30})
+            .withMessage('name most be at least 2 characters!!')
+            .matches(/^[a-zA-Z0-9_]+$/)
+            .withMessage("Username can only contain letters, numbers, and underscores"),
         body('subject')
             .trim()
             .isLength({ min: 2})
