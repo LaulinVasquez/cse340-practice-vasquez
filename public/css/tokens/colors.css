@@ -1,12 +1,16 @@
 :root {
-    --color-primary: #2c5aa0;
+  --color-primary: #2c5aa0;
 
-    --color-background: rgb(39, 165, 208);
+  background: linear-gradient(
+    20deg,
+    oklch(100% 0.00011 271.152),
+    oklch(38.185% 0.12474 255.63)
+  );
 
-    --color-surface: #ffffff;
+  --color-surface: #ffffff;
 
-    --color-text: #222;
-    --color-text-light: #666;
+  --color-text: #222;
+  --color-text-light: #666;
 
-    --color-border: #ddd;
+  --color-border: #ddd;
 }
