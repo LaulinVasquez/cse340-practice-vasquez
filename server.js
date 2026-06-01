@@ -1,4 +1,6 @@
-// Import express using ESM syntax
+import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
+import { caCert } from "./src/models/db.js";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -17,18 +19,49 @@ const PORT = process.env.PORT || 3000; // set the port from .env file or default
 // app = express() creates an instance for the application
 const app = express();
 
+// Initialize PostgreSQL session store
+const pgSession = connectPgSimple(session);
+
+// Configure session middleware
+app.use(
+  session({
+    store: new pgSession({
+      conObject: {
+        connectionString: process.env.DB_URL,
+        // Configure SSL for session store connection (required by BYU-I databases)
+        ssl: {
+          ca: caCert,
+          rejectUnauthorized: true,
+          checkServerIdentity: () => {
+            return undefined;
+          },
+        },
+      },
+      tableName: "session",
+      createTableIfMissing: true,
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: NODE_ENV.includes("dev") !== true,
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  }),
+);
+
 // Configure Express
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs"); // set the view engine to ejs
 app.set("views", path.join(__dirname, "src/views")); // Tell Express where to find your templates
-
 
 // global middleware
 app.use(addLocalVariables);
 
 // setting up parse url-encoded ( Allow Express to receive and process POST data)
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
+app.use(express.json());
 
 // Routes
 app.use("/", routes);
