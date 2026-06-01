@@ -38,7 +38,7 @@ const registrationValidation = [
 //  Display the registration form page.
 
 const showRegistrationForm = (req, res) => {
-  res.render("forms/registration/form", {
+  res.render("./forms/registration/form", {
     title: "User Registration",
   });
 };
@@ -55,13 +55,13 @@ const processRegistration = async (req, res) => {
 
   const { name, email, password } = req.body;
 
+
   try {
-    if (emailExists(email)) {
+    if (emailExists(email) === email) {
       console.log("Email already registered");
-      return res.render("/register", {
-        title: "User Registration",
-      });
+      return res.redirect("/register");
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await saveUser(name, email, hashedPassword);
@@ -79,12 +79,13 @@ const showAllUsers = async (req, res) => {
     // Initialize users as empty array
     let users = [];
     try {
-        users = getAllUsers();
+        users = await getAllUsers();
     } catch (error) {
         console.error("Error retriving users", error)
     }
     res.render("forms/registration/list", {
-        title: "Registered Users"
+        title: "Registered Users",
+        users: users
     })
 };
 // GET / register - Display the registration form

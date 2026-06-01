@@ -1,5 +1,6 @@
 import { Router } from "express";
 import contactRoutes from './forms/contact.js';
+import registrationRoutes from './forms/registration.js';
 
 //  Create a new router instance
 const router = Router();
@@ -52,6 +53,9 @@ router.get("/faculty/:facultySlug", facultyDetailPage);
 
 // Contact page
 router.use('/contact', contactRoutes)
+
+// Registration route
+router.use('/register', registrationRoutes)
 
 // Router to trigger error
 router.get("/test-error", testErrorPage);
