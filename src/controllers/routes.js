@@ -35,6 +35,11 @@ router.use("/register", (req, res, next) => {
   res.addStyle('<link rel="stylesheet" href="/css/main.css">');
   next();
 });
+router.use("/login", (req, res, next) => {
+  res.addStyle('<link rel="stylesheet" href="/css/main.css">');
+  next();
+});
+
 
 // Home and Basics
 router.get("/", homePage);

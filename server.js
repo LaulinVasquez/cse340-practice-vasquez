@@ -1,4 +1,5 @@
 import session from "express-session";
+import { startSessionCleanup } from "./src/utils/session-cleanup.js";
 import connectPgSimple from "connect-pg-simple";
 import { caCert } from "./src/models/db.js";
 import express from "express";
@@ -58,6 +59,9 @@ app.set("views", path.join(__dirname, "src/views")); // Tell Express where to fi
 
 // global middleware
 app.use(addLocalVariables);
+
+// Start automatic
+startSessionCleanup();
 
 // setting up parse url-encoded ( Allow Express to receive and process POST data)
 app.use(express.urlencoded({ extended: true }));
