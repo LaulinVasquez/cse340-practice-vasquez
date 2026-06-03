@@ -29,12 +29,7 @@ const findUserByEmail = async (email) => {
 const verifyPassword = async (plainPassword, hashedPassword) => {
   // TODO: Use bcrypt.compare() to verify the password
   const isValid = await bcrypt.compare(plainPassword, hashedPassword);
-
-  if (isValid) {
-    console.log("Login Successful!");
-  } else {
-    console.log("Invalid Password");
-  }
+  
   return isValid;
 };
 

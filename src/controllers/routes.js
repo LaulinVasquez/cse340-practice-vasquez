@@ -1,3 +1,7 @@
+
+import loginRoutes from './forms/login.js';
+import { processLogout, showDashboard } from './forms/login.js';
+import { requireLogin } from '../middleware/auth.js';
 import { Router } from "express";
 import contactRoutes from './forms/contact.js';
 import registrationRoutes from './forms/registration.js';
@@ -61,6 +65,13 @@ router.use('/contact', contactRoutes)
 
 // Registration route
 router.use('/register', registrationRoutes)
+
+// Login routes (form and submission)
+router.use('/login', loginRoutes);
+
+// Authentication-related routes at root level
+router.get('/logout', processLogout);
+router.get('/dashboard', requireLogin, showDashboard);
 
 // Router to trigger error
 router.get("/test-error", testErrorPage);

@@ -88,13 +88,13 @@
     padding: 2rem;
 
     h1 {
-        color: #2c5aa0;
+        color: var(--color-surface);
         margin-bottom: 1rem;
     }
 
     & > p {
         margin-bottom: 2rem;
-        color: #666;
+        color: var(--color-text);
     }
 
     .user-info,

@@ -36,7 +36,7 @@ const processLogin = async (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        // TODO: Log validation errors to console
+
         console.error("validation errors", errors.array());
         return res.render("/forms/login/form", {
             title: "User Login"
@@ -45,16 +45,12 @@ const processLogin = async (req, res) => {
     const {email, password} = req.body;
     try {
         const user = await findUserByEmail(email);
-        // TODO: Find user by email using findUserByEmail()
+
         if (!user) {
             console.log("User not found");
             res.redirect("/login");
         }
-        // TODO: If not found, log "User not found" and redirect to /login
-
-        // TODO: Verify password using verifyPassword(password, user.password)
         const isValid = verifyPassword(password, user.password)
-        // TODO: If password incorrect, log "Invalid password" and redirect to /login
         if (!isValid) {
             console.log("Invalid Password");
             res.redirect("/login");
@@ -63,12 +59,14 @@ const processLogin = async (req, res) => {
         // SECURITY: Remove password from user object before storing in session
         delete user.password;
 
-        // TODO: Store user in session: req.session.user = user
-        // TODO: Redirect to /dashboard
+        req.session.user = user;
+        console.log("Login Succesful")
+        res.redirect("dashboard");
+
     } catch (error) {
         // Model functions do not catch errors, so handle them here
-        // TODO: Log error to console
-        // TODO: Redirect to /login
+        console.error("Hey something went wrong 😔, checkit out", error);
+        res.redirect("/login")
     }
 };
 
@@ -134,6 +132,11 @@ const showDashboard = (req, res) => {
 
     // TODO: Render the dashboard view (dashboard)
     // TODO: Pass title: 'Dashboard', user, and sessionData to template
+    res.render("dashboard",{
+        title: "Dashboard",
+        user: user,
+        sessionData: sessionData
+    })
 };
 
 // Routes
