@@ -14,6 +14,7 @@
 @import url('./components/contact.css') layer(components);
 @import url('./components/registration.css') layer(components);
 @import url('./components/login.css') layer(components);
+@import url('./components/flashMessages.css') layer(components);
 
 @import url('./utilities/flex.css') layer(utilities);
 @import url('./utilities/text.css') layer(utilities);

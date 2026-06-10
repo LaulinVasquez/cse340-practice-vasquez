@@ -6,6 +6,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { setupDatabase, testConnection } from "./src/models/setup.js";
+import flash from "./src/middleware/flash.js";
 
 // Import MVC components
 import routes from "./src/controllers/routes.js";
@@ -59,6 +60,9 @@ app.set("views", path.join(__dirname, "src/views")); // Tell Express where to fi
 
 // global middleware
 app.use(addLocalVariables);
+
+// Flash message middleware (must come after session and global middleware)
+app.use(flash);
 
 // Start automatic
 startSessionCleanup();
