@@ -41,12 +41,15 @@ const handleContactSubmission = async (req, res) => {
     //  Save to database
     await createContactForm(fname, subject, message);
     // console.log("Contact form submitted successfully");
-    req.flash("sucess", "Thank you for contacting us! We will respond soon.");
+    req.flash("success", "Thank you for contacting us! We will respond soon.");
     // Redirect to responses page on success
     res.redirect("/contact/responses");
   } catch (error) {
     console.error("Error saving contact form:", error);
-    req.flash("error", "Unable to submit your message. Please try again later.");
+    req.flash(
+      "error",
+      "Unable to submit your message. Please try again later.",
+    );
     res.redirect("/contact");
   }
 };
@@ -57,7 +60,6 @@ const showContactResponses = async (req, res) => {
   try {
     contactForms = await getAllContactForms();
   } catch (error) {
-    // console.error('Error retriving contact forms:', error);
     req.flash("error", error);
   }
   res.render("forms/contact/responses", {
@@ -84,12 +86,23 @@ router.post(
       ),
     body("subject")
       .trim()
-      .isLength({ min: 2 })
-      .withMessage("Subject most be at least 2 characters!!"),
+      .isLength({ min: 2, max: 255 })
+      .withMessage("Subject must be between 2 and 255 characters")
+      .matches(/^[a-zA-Z0-9\s\-.,!?]+$/)
+      .withMessage("Subject contains invalid characters"),
     body("message")
       .trim()
-      .isLength({ min: 10 })
-      .withMessage("Message most be at least 10 characters"),
+      .isLength({ min: 10, max: 2000 })
+      .withMessage("Message must be between 10 and 2000 characters")
+      .custom((value) => {
+        // Check for spam patterns (excessive repetition)
+        const words = value.split(/\s+/);
+        const uniqueWords = new Set(words);
+        if (words.length > 20 && uniqueWords.size / words.length < 0.3) {
+          throw new Error("Message appears to be spam");
+        }
+        return true;
+      }),
   ],
   handleContactSubmission,
 );

@@ -13,22 +13,31 @@ const router = Router();
 const registrationValidation = [
   body("name")
     .trim()
-    .isLength({ min: 2, max: 30 })
-    .withMessage("Name must be at least 2 characters"),
+    .isLength({ min: 2, max: 100 })
+    .withMessage("Name must be between 2 and 100 characters")
+    .matches(/^[a-zA-Z\s'-]+$/)
+    .withMessage("Name can only contain letters, spaces, hyphens, and apostrophes"),
   body("email")
     .trim()
     .isEmail()
     .normalizeEmail()
-    .withMessage("Must be a valid address"),
+    .withMessage("Must be a valid address")
+    .isLength({ max: 255 })
+    .withMessage("Email address is too long"),
   body("emailConfirm")
     .trim()
     .custom((value, { req }) => value === req.body.email)
     .withMessage("Email address must match"),
   body("password")
-    .isLength({ min: 8 })
+    .isLength({ min: 8, max: 128 })
+    .withMessage("Password must be between 8 and 128 characters")
     .matches(/[0-9]/)
     .withMessage("Password must contain at least one number")
-    .matches(/[!@#$%^&*]/)
+    .matches(/[a-z]/)
+    .withMessage('Password must contain at least one lowercase letter')
+    .matches(/[A-Z]/)
+    .withMessage("Password must contain at least one uppercase letter")
+    .matches(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)
     .withMessage("Password must contain at least one special character"),
   body("passwordConfirm")
     .custom((value, { req }) => value === req.body.password)
@@ -47,7 +56,9 @@ const processRegistration = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    console.error("Validation erros", errors.array());
+    errors.array().forEach(error => {
+      req.flash("error", error.msg);
+    })
     return res.render("forms/registration/form", {
       title: "User Registration",
     });
@@ -58,17 +69,17 @@ const processRegistration = async (req, res) => {
 
   try {
     if (emailExists(email) === email) {
-      console.log("Email already registered");
+      req.flash("error", "email already registered");
       return res.redirect("/register");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await saveUser(name, email, hashedPassword);
-    console.log("user registered successfully");
+    req.flash("sucess", "user succesfully registered")
     res.redirect("/register");
   } catch (error) {
-    console.error("Hey something went wrong, check it out:", error);
+    req.flash("error", error);
     res.redirect("/register");
   }
 };
@@ -81,7 +92,7 @@ const showAllUsers = async (req, res) => {
     try {
         users = await getAllUsers();
     } catch (error) {
-        console.error("Error retriving users", error)
+        req.flash("error", error)
     }
     res.render("forms/registration/list", {
         title: "Registered Users",
