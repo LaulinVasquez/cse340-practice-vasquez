@@ -1,0 +1,85 @@
+/* Main container */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-xl);
+}
+
+/* Page title */
+h1 {
+  margin-bottom: var(--space-xl);
+}
+
+/* Card sections */
+.demo-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.08);
+}
+
+/* Section titles */
+.demo-section h2 {
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-sm);
+}
+
+/* Paragraph spacing */
+.demo-section p {
+  margin: var(--space-md) 0;
+  line-height: 1.6;
+}
+
+/* Lists */
+.demo-section ul,
+.demo-section ol {
+  padding-left: 1.5rem;
+  margin: var(--space-md) 0;
+}
+
+.demo-section li {
+  margin-bottom: var(--space-sm);
+}
+
+/* Emphasis text */
+em {
+  color: var(--color-text-light);
+}
+
+/* Strong text */
+strong {
+  color: var(--color-primary);
+}
+
+/* Back link */
+main a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
+
+.demo-section {
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,.4);
+  border-radius: 16px;
+
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.12);
+}

@@ -12,6 +12,7 @@
 
 @import url('./components/card.css') layer(components);
 @import url('./components/contact.css') layer(components);
+@import url('./components/demo.css') layer(components);
 @import url('./components/registration.css') layer(components);
 @import url('./components/login.css') layer(components);
 @import url('./components/flashMessages.css') layer(components);

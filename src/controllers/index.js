@@ -9,7 +9,7 @@ const aboutPage = (req, res) => {
 };
 
 const demoPage = (req, res) => {
-  res.render("demo", { tile: "Middleware Demo Page" }); //Checke header.js
+  res.render("demo", { title: "Middleware Demo Page" }); //Checke header.js
 };
 
 const testErrorPage = (req, res, next) => {
